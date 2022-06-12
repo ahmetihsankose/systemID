@@ -33,5 +33,5 @@ viscousDamping = -inertia*p_w;
 coulombTorquePositive = theta(3)/theta(2);
 coulombTorqueNegative = theta(4)/theta(2);
 
-table(inertia,viscousDamping,coulombTorquePositive,coulombTorqueNegative)
+table(inertia,coulombTorquePositive,coulombTorqueNegative,viscousDamping)
 end
