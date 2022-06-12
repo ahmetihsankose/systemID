@@ -25,23 +25,23 @@ velocityHat = fft(velocity,N);
 x = velocityHat;
 F = torqueHat;
 
-PSD_F = F.*conj(F)/N;  % Power spectrum (how much power in each freq)
-PSD_x = x.*conj(x)/N;  % Power spectrum (how much power in each freq)
-CPS_xF = x.*conj(F)/N;   %% Cross Power Spectrum
-CPS_Fx = F.*conj(x)/N;   %% Cross Power Spectrum
+SFF = F.*conj(F)/N;  % Power spectrum (how much power in each freq)
+Sxx = x.*conj(x)/N;  % Power spectrum (how much power in each freq)
+SxF = x.*conj(F)/N;   %% Cross Power Spectrum
+SFx = F.*conj(x)/N;   %% Cross Power Spectrum
 
-frf = CPS_xF./PSD_F;
+frf = SxF./SFF;
 
 L = 1:floor(N/2);  % only plot the first half of freqs
 
-coherence = abs(CPS_xF) ./ (sqrt(PSD_F) .* sqrt(PSD_x));
+coherence = abs(SxF) ./ (sqrt(SFF) .* sqrt(Sxx));
 
 subplot(4,1,1)
-plot(PSD_F(L),'LineWidth',1.5), hold on
+plot(SFF(L),'LineWidth',1.5), hold on
 legend('PSD of torque')
 
 subplot(4,1,2)
-plot(PSD_x(L),'LineWidth',1.5), hold on
+plot(Sxx(L),'LineWidth',1.5), hold on
 legend('PSD of velocity')
 
 subplot(4,1,3)
@@ -49,6 +49,9 @@ plot(real(frf(L)),'LineWidth',1.5)
 legend('frequency response')
 
 subplot(4,1,4)
-plot(coherence,'LineWidth',1.5)
+plot(coherence(L),'LineWidth',1.5)
 legend('coherence')
 
+
+
+toc
