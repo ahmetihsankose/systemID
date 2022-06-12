@@ -12,8 +12,8 @@ tempData4=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_5ms.csv');
 data=tempData(6:end,:);
 data1=tempData1(6:end,:);
 data2=tempData2(6:end,:);
-data3=tempData2(6:end,:);
-data4=tempData2(6:end,:);
+data3=tempData3(6:end,:);
+data4=tempData4(6:end,:);
 
 velocity  = data(:,16)/10000*5/60; velocity(end) = [];   %mm/s
 velocity1  = data1(:,16)/10000*5/60; velocity1(end) = [];   %mm/s
@@ -66,20 +66,20 @@ subplot(4,1,1)
 plot(meanSFF(L)/N,'LineWidth',1.5)
 legend('PSD of torque')
 xlabel('frequency [Hz]')
-ylabel('[N*m]')
+% ylabel('[N*m]')
 
 
 subplot(4,1,2)
 plot(meanSxx(L)/N,'LineWidth',1.5)
 legend('PSD of velocity')
 xlabel('frequency [Hz]')
-ylabel('[mm/s]')
+% ylabel('[mm/s]')
 
 subplot(4,1,3)
-plot(real(frf(L)),'LineWidth',1.5)
+plot(real(frf(L)),'LineWidth',3)
 legend('frequency response')
 xlabel('frequency [Hz]')
-ylabel('mm/(s*N*m)')
+% ylabel('mm/(s*N*m)')
 
 subplot(4,1,4)
 plot(coherence(L),'LineWidth',1.5)

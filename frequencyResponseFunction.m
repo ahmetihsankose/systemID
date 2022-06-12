@@ -1,6 +1,6 @@
-clc,clear,close all
+clc,clear,
 tic
-tempData=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_10ms.csv');
+tempData=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_20ms.csv');
 data=tempData(6:end,:);
 samplingTime = 0.001;
 
