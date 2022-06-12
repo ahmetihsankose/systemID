@@ -30,7 +30,7 @@ out1 = sim('torqueMode.slx',simTime);
 figure(1);
 plot(out.tout,out.yout,'LineWidth',1.5)
 hold on
-plot(out.tout,velocity,'LineWidth',3)
+plot(out.tout,velocity,'LineWidth',1.5)
 xlabel('time [ms]'), ylabel('velocity [rad/s]')
 legend('least square simulink result','experimental result')
 set(gca,'FontSize',11)
@@ -39,7 +39,7 @@ set(gcf,'Position',[600 300 800 480])
 figure(2);
 plot(out1.tout,out1.yout,'LineWidth',1.5)
 hold on
-plot(out1.tout,velocity,'LineWidth',3)
+plot(out1.tout,velocity,'LineWidth',1.5)
 xlabel('time [ms]'), ylabel('velocity [rad/s]')
 legend('velocity ride simulink result','experimental result')
 set(gca,'FontSize',11)
@@ -49,9 +49,9 @@ figure(3);
 plot(out.tout,out.yout,'LineWidth',1.5)
 hold on
 plot(out1.tout,out1.yout,'LineWidth',1.5)
-plot(out1.tout,velocity,'LineWidth',3)
+plot(out1.tout,velocity,'LineWidth',1.5)
 xlabel('time [ms]'), ylabel('velocity [rad/s]')
-legend('least square simulink result','velocity ride simulink result','experimental result')
+legend('least','velocity ride simulink result','experimental result')
 set(gca,'FontSize',11)
 set(gcf,'Position',[600 300 800 480])
 

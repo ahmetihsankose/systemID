@@ -1,5 +1,4 @@
-close all
-tic
+function [viscousDamping,coulombTorquePositive,coulombTorqueNegative] = velRide()
 tempData=readmatrix('../ScopeResults/20220530_Y_Axis_VelocityRide_velocityMode_2.csv');
 data=tempData(6:end,:);
 samplingTime = 0.001;
@@ -38,47 +37,47 @@ filteredVelocityNeg = smoothdata(velocityNeg,'SmoothingFactor',smoothFactor);
 resultFitPos = polyfit(filteredVelocityPos,filteredTorquePos,1);
 resultFitNeg = polyfit(filteredVelocityNeg,filteredTorqueNeg,1);
 
-f = figure(1);
-f.Position = [150 150 1200 480];
-subplot(1,2,1)
-plot(torquePos)
-hold on
-plot(filteredTorquePos,'-r','Linewidth',2)
-title('Torque')
-ylabel('Torque [N*m]')
-legend('main positive direction data','filtered data')
-hold off 
-
-subplot(1,2,2)
-y1 = polyval(resultFitPos,filteredVelocityPos);
-plot(filteredVelocityPos,y1,'Linewidth',4)
-hold on
-plot(filteredVelocityPos,filteredTorquePos,'-r','Linewidth',2)
-title('Y Ekseni Velocity vs Torque')
-xlabel('velocity [rad/s]'); ylabel('Torque [N*m]')
-legend('fitting curve','filtered data')
-hold off
-
-f = figure(2);
-f.Position = [150 150 1200 480];
-subplot(1,2,1)
-plot(torqueNeg)
-hold on
-plot(filteredTorqueNeg,'-r','Linewidth',2)
-title('Torque')
-ylabel('Torque [N*m]')
-legend('main negative direction data','filtered data')
-hold off 
-
-subplot(1,2,2)
-y2 = polyval(resultFitNeg,filteredVelocityNeg);
-plot(filteredVelocityNeg,y2,'Linewidth',4)
-hold on
-plot(filteredVelocityNeg,filteredTorqueNeg,'-r','Linewidth',2)
-title('Y Ekseni Velocity vs Torque')
-xlabel('velocity [rad/s]'); ylabel('Torque [N*m]')
-legend('fitting curve','filtered data')
-hold off
+% f = figure(1);
+% f.Position = [150 150 1200 480];
+% subplot(1,2,1)
+% plot(torquePos)
+% hold on
+% plot(filteredTorquePos,'-r','Linewidth',2)
+% title('Torque')
+% ylabel('Torque [N*m]')
+% legend('main positive direction data','filtered data')
+% hold off
+% 
+% subplot(1,2,2)
+% y1 = polyval(resultFitPos,filteredVelocityPos);
+% plot(filteredVelocityPos,y1,'Linewidth',4)
+% hold on
+% plot(filteredVelocityPos,filteredTorquePos,'-r','Linewidth',2)
+% title('Y Ekseni Velocity vs Torque')
+% xlabel('velocity [rad/s]'); ylabel('Torque [N*m]')
+% legend('fitting curve','filtered data')
+% hold off
+% 
+% f = figure(2);
+% f.Position = [150 150 1200 480];
+% subplot(1,2,1)
+% plot(torqueNeg)
+% hold on
+% plot(filteredTorqueNeg,'-r','Linewidth',2)
+% title('Torque')
+% ylabel('Torque [N*m]')
+% legend('main negative direction data','filtered data')
+% hold off
+% 
+% subplot(1,2,2)
+% y2 = polyval(resultFitNeg,filteredVelocityNeg);
+% plot(filteredVelocityNeg,y2,'Linewidth',4)
+% hold on
+% plot(filteredVelocityNeg,filteredTorqueNeg,'-r','Linewidth',2)
+% title('Y Ekseni Velocity vs Torque')
+% xlabel('velocity [rad/s]'); ylabel('Torque [N*m]')
+% legend('fitting curve','filtered data')
+% hold off
 
 viscousDampingPos = resultFitPos(1);
 coulombTorquePositive = resultFitPos(2);
@@ -88,4 +87,5 @@ coulombTorqueNegative = resultFitNeg(2);
 viscousDamping = (viscousDampingPos+viscousDampingNeg)/2;
 table(coulombTorquePositive,coulombTorqueNegative,viscousDamping)
 
-toc
+
+end
