@@ -2,34 +2,40 @@
 
 clc,clear,
 tic
+
 tempData=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_10ms.csv');
 tempData1=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_10ms_doublet.csv');
 tempData2=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_6Nm_10ms.csv');
+tempData3=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_20ms.csv');
+tempData4=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_5ms.csv');
+
 data=tempData(6:end,:);
 data1=tempData1(6:end,:);
 data2=tempData2(6:end,:);
+data3=tempData2(6:end,:);
+data4=tempData2(6:end,:);
+
+velocity  = data(:,16)/10000*5/60; velocity(end) = [];   %mm/s
+velocity1  = data1(:,16)/10000*5/60; velocity1(end) = [];   %mm/s
+velocity2  = data2(:,16)/10000*5/60; velocity2(end) = [];   %mm/s
+velocity3  = data3(:,16)/10000*5/60; velocity3(end) = [];   %mm/s
+velocity4  = data4(:,16)/10000*5/60; velocity4(end) = [];   %mm/s
+
+torque = data(:,22)/1000*2.37; torque(end) = [];  %Nm
+torque1 = data1(:,22)/1000*2.37; torque1(end) = [];  %Nm
+torque2 = data2(:,22)/1000*2.37; torque2(end) = [];  %Nm
+torque3 = data3(:,22)/1000*2.37; torque3(end) = [];  %Nm
+torque4 = data4(:,22)/1000*2.37; torque4(end) = [];  %Nm
+
 
 samplingTime = 0.001;
 
-axis = 'Y';
-switch axis
-    case 'X'
-        velocity  = data(:,14)/10000*5/60; velocity(end) = [];   %mm/s
-        torque = data(:,20)/1000*2.37; torque(end) = [];  %Nm
-    case 'Y'
-        velocity  = data(:,16)/10000*5/60; velocity(end) = [];   %mm/s
-        torque = data(:,22)/1000*2.37; torque(end) = [];  %Nm
+numOfData = min([size(data,1),size(data1,1),size(data2,1),size(data3,1),size(data4,1)]);
 
-        velocity1  = data1(:,16)/10000*5/60; velocity1(end) = [];   %mm/s
-        torque1 = data1(:,22)/1000*2.37; torque1(end) = [];  %Nm
+N = 1:1:numOfData-1; % number of data
 
-        velocity2  = data2(:,16)/10000*5/60; velocity2(end) = [];   %mm/s
-        torque2 = data2(:,22)/1000*2.37; torque2(end) = [];  %Nm
-end
-N = 1:1:length(torque1); % number of data
-
-torqueData = [torque(N), torque1(N), torque2(N)];
-velocityData = [velocity(N), velocity1(N), velocity2(N)];
+torqueData = [torque(N), torque1(N), torque2(N), torque3(N), torque4(N)];
+velocityData = [velocity(N), velocity1(N), velocity2(N), velocity3(N), velocity4(N)];
 
 K  = size(torqueData,2);                                     % Define the number of trials.
 N  = size(torqueData,1);                                     % Define the number of indices per trial.
