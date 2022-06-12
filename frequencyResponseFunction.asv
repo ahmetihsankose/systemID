@@ -1,0 +1,48 @@
+clc,clear,close all
+tic
+tempData=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_10ms_doublet.csv');
+data=tempData(6:end,:);
+samplingTime = 0.001;
+
+axis = 'Y';
+switch axis
+    case 'X'
+        velocity  = data(:,14)/10000*5/60; velocity(end) = [];   %mm/s
+        torque = data(:,20)/1000*2.37; torque(end) = [];  %Nm
+    case 'Y'
+        velocity  = data(:,16)/10000*5/60; velocity(end) = [];   %mm/s
+        torque = data(:,22)/1000*2.37; torque(end) = [];  %Nm
+end
+
+N = length(torque); % number of data
+w_r = N*samplingTime/2/pi; 
+w_m = N/2*
+
+torqueHat = fft(torque,N);
+velocityHat = fft(velocity,N);
+
+x = velocityHat;
+F = torqueHat;
+
+PSD_F = F.*conj(F)/N;  % Power spectrum (how much power in each freq)
+PSD_x = x.*conj(x)/N;  % Power spectrum (how much power in each freq)
+CPS_xF = x.*conj(F)/N;   %% Cross Power Spectrum
+CPS_Fx = F.*conj(x)/N;   %% Cross Power Spectrum
+
+frf = CPS_xF./PSD_F;
+
+freq = 1/(samplingTime*N)*(0:N);  %create the x-axis of frequencies in Hz
+L = 1:floor(N/2);  % only plot the first half of freqs
+
+subplot(3,1,1)
+plot(PSD_F(L),'LineWidth',1.5), hold on
+legend('power of torque')
+
+subplot(3,1,2)
+plot(PSD_x(L),'LineWidth',1.5), hold on
+legend('power of velocity')
+
+subplot(3,1,3)
+plot(freq(L),real(frf(L)),'LineWidth',1.5)
+legend('frequency response function')
+
