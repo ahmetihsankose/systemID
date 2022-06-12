@@ -76,7 +76,7 @@ xlabel('frequency [Hz]')
 % ylabel('[mm/s]')
 
 subplot(4,1,3)
-plot(real(frf(L)),'LineWidth',3)
+plot(real(frf(L)),'LineWidth',2)
 legend('frequency response')
 xlabel('frequency [Hz]')
 % ylabel('mm/(s*N*m)')
