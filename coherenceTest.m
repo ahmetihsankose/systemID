@@ -59,23 +59,32 @@ meanSxF = mean(SxF,1);
 
 coherence = abs(meanSxF) ./ (sqrt(meanSFF) .* sqrt(meanSxx));        % Compute the coherence.
 
+
 frf = meanSxF./meanSFF;
 
 subplot(4,1,1)
-plot(meanSFF(L),'LineWidth',1.5)
+plot(meanSFF(L)/N,'LineWidth',1.5)
 legend('PSD of torque')
+xlabel('frequency [Hz]')
+ylabel('[N*m]')
+
 
 subplot(4,1,2)
-plot(meanSxx(L),'LineWidth',1.5)
+plot(meanSxx(L)/N,'LineWidth',1.5)
 legend('PSD of velocity')
+xlabel('frequency [Hz]')
+ylabel('[mm/s]')
 
 subplot(4,1,3)
 plot(real(frf(L)),'LineWidth',1.5)
 legend('frequency response')
+xlabel('frequency [Hz]')
+ylabel('mm/(s*N*m)')
 
 subplot(4,1,4)
 plot(coherence(L),'LineWidth',1.5)
 legend('coherence')
+xlabel('frequency [Hz]')
 
 
 
