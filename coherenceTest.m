@@ -37,9 +37,9 @@ N = 1:1:numOfData-1; % number of data
 torqueData = [torque(N), torque1(N), torque2(N), torque3(N), torque4(N)];
 velocityData = [velocity(N), velocity1(N), velocity2(N), velocity3(N), velocity4(N)];
 
-K  = size(torqueData,2);                                     % Define the number of trials.
-N  = size(torqueData,1);                                     % Define the number of indices per trial.
-SFF = zeros(N,K);                                   % Create variables to save the spectra.
+K  = size(torqueData,2);                                     % number of trials.
+N  = size(torqueData,1);                                     % umber of indices per trial.
+SFF = zeros(N,K);                            
 Sxx = zeros(N,K);
 SxF = zeros(N,K);
 for k=1:K                                                   % Compute the spectra for each trial.
