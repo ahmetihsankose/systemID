@@ -1,9 +1,11 @@
 clc,clear, 
 close all
-tempData=readmatrix('../systemIDtest/sineSwept_x_Axis_torqueMode_0To500Hz_0_05tor_0_25bias_20062022.csv');
-data=tempData(6:end-1,:);
 
-sampleTime = 0.001; % s
+addpath('C:\Users\Ahmet\Desktop\working_directory\Scope\TestData')
+tempData=readmatrix('y_Axis_ImpulseTest_25torq_27062022.csv');
+data=tempData(2:end-1,:);
+
+sampleTime = 0.0005; % s
 time    = data(:,1)*sampleTime;      % s
 
 xTorqTarget = data(:,2)/1000*2.37; %N-m

@@ -2,7 +2,7 @@ clc,clear,close all
 tic
 tempData=readmatrix('../ScopeResults/20220530_Y_Axis_LeastSquare_0.6Nm_100ms.csv');
 data=tempData(6:end,:);
-samplingTime = 0.001;
+sampleTime = 0.001;
 
 axis = 'Y';
 switch axis
@@ -17,8 +17,8 @@ end
 [inertia,viscousDamping,coulombTorquePositive,coulombTorqueNegative] = leastSquare(torque,velocity);
 
 
-simTime = samplingTime*(length(torque)-1);
-torqueInput.time = 0:samplingTime:simTime;
+simTime = sampleTime*(length(torque)-1);
+torqueInput.time = 0:sampleTime:simTime;
 torqueInput.signals.values = torque;
 out = sim('torqueMode.slx',simTime);
 

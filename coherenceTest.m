@@ -2,6 +2,7 @@
 
 clc,clear,
 tic
+addpath('C:\Users\Ahmet\Desktop\working_directory\Scope\TestData')
 
 tempData=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_10ms.csv');
 tempData1=readmatrix('../ScopeResults/20220531_Y_Axis_Pulse_9Nm_10ms_doublet.csv');
