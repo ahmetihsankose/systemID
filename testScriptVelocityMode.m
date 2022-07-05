@@ -17,9 +17,9 @@ end
 clearvars -except coulombTorquePositive coulombTorqueNegative inertia viscousDamping
 
 addpath('/home/kose/matlab/Scope/TestData')
-tempData=readmatrix('sineSweept_y_Axis_torqueMode_0To70Hz_2tor_05sample_27062022.csv');
+tempData=readmatrix('sineSweept_y_Axis_velocityMode_0To100Hz_0_3tor_20vel_23062022.csv');
 data=tempData(6:end-1,:);
-sampleTime = 0.0005; %%% seconds
+sampleTime = 0.001; %%% seconds
 
 axis = 'Y';
 switch axis
@@ -34,7 +34,7 @@ end
 simTime = sampleTime*(length(torque)-1);
 torqueInput.time = 0:sampleTime:simTime;
 torqueInput.signals.values = torque;
-out = sim('Copy_of_torqueMode.slx',simTime);
+out = sim('Copy_of_velocityMode.slx',simTime);
 
 drivenTorque = out.simout1;
 simVelocity = out.simout;
