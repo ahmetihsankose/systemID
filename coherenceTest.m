@@ -39,7 +39,7 @@ torqueData = [torque(N), torque1(N), torque2(N), torque3(N), torque4(N)];
 velocityData = [velocity(N), velocity1(N), velocity2(N), velocity3(N), velocity4(N)];
 
 K  = size(torqueData,2);                                     % number of trials.
-N  = size(torqueData,1);                                     % umber of indices per trial.
+N  = size(torqueData,1);                                     % number of indices per trial.
 SFF = zeros(N,K);                            
 Sxx = zeros(N,K);
 SxF = zeros(N,K);
@@ -50,11 +50,11 @@ for k=1:K                                                   % Compute the spectr
 end
 L = 1:floor(N/2);  % only plot the first half of freqs
 
-SFF = SFF(L,:)';                               % Ignore the negative frequencies.
+SFF = SFF(L,:)';                           
 Sxx = Sxx(L,:)';
 SxF = SxF(L,:)';
 
-meanSFF = mean(SFF,1);                                  % Average the spectra across trials.
+meanSFF = mean(SFF,1);                                 
 meanSxx = mean(Sxx,1);
 meanSxF = mean(SxF,1);
 
@@ -86,7 +86,6 @@ subplot(4,1,4)
 plot(coherence(L),'LineWidth',1.5)
 legend('coherence')
 xlabel('frequency [Hz]')
-
 
 
 toc

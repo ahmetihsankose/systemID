@@ -1,3 +1,4 @@
+%%% coherence test from one big data
 % averaged power spectrum
 clc,clear,
 tic
@@ -14,7 +15,7 @@ tempData=readmatrix('y_Axis_ImpulseTest_23torq_27062022.csv');
 data=tempData(2:end-1,:);
 yTorqFb = data(:,12)/1000*2.37; %Nm
 
-threshold = 0.5;
+threshold = 1;
 firstIndex = [];
 
 for i = 1:length(yTorqFb)
@@ -24,11 +25,11 @@ for i = 1:length(yTorqFb)
 end
 IndexEnd = firstIndex(1)+range/2;
 
-data1=tempData(2:IndexEnd,:);
+data1=tempData(IndexEnd-range:IndexEnd,:);
 data2=tempData(IndexEnd:IndexEnd+range,:);
 data3=tempData(IndexEnd+range:IndexEnd+2*range,:);
 data4=tempData(IndexEnd+2*range:IndexEnd+3*range,:);
-data5=tempData(IndexEnd+3*range:end-1,:);
+data5=tempData(IndexEnd+3*range:IndexEnd+4*range,:);
 
 velocity1  = data1(:,30)/10000*5/60;   %m-m/s
 velocity2  = data2(:,30)/10000*5/60;   %m-m/s
@@ -93,12 +94,12 @@ legend('PSD of velocity')
 ylabel('[rad^2/s^2]')
 
 subplot(4,1,3)
-semilogx(freq(L),20*log10(abs(frf(L))),'LineWidth',2)
+semilogx(freq(L),abs(frf(L)),'LineWidth',2)
 hold on
 title('Frequency Response')
 legend('frequency response')
 % xlabel('frequency [Hz]')
-ylabel('magnitude [dB]')
+ylabel('abs')
 
 subplot(4,1,4)
 semilogx(freq(L),coherence(L),'LineWidth',1.5)

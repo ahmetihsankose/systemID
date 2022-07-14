@@ -47,7 +47,7 @@ L = 1:floor(N/2);  % only plot the first half of freqs
 
 coherence = abs(SxF) ./ (sqrt(SFF) .* sqrt(Sxx));
 
-subplot(4,1,1)
+subplot(3,1,1)
 semilogx(freq(L),SFF(L),'LineWidth',1.5)
 hold on
 % semilogx(freq(L),Sxx_Fh(L),'LineWidth',1.5)
@@ -56,7 +56,7 @@ title('Power Spectra of Torque')
 % xlabel('frequency [Hz]')
 ylabel('[N^2*m^2]')
 
-subplot(4,1,2)
+subplot(3,1,2)
 semilogx(freq(L),Sxx(L),'LineWidth',1.5)
 hold on
 % semilogx(freq(L),Sxx_Fh(L),'LineWidth',1.5)
@@ -65,7 +65,7 @@ title('Power Spectra of Velocity')
 % xlabel('frequency [Hz]')
 ylabel('[rad^2/s^2]')
 
-subplot(4,1,3)
+subplot(3,1,3)
 semilogx(freq(L),20*log10(abs(frf(L))),'LineWidth',1.5)
 hold on
 % semilogx(freq(L),abs(frf_h(L)),'LineWidth',1.5)
@@ -73,13 +73,6 @@ hold on
 title('Frequency Response')
 % xlabel('frequency [Hz]')
 ylabel('magnitude [dB]')
-
-subplot(4,1,4)
-semilogx(freq(L),coherence(L),'LineWidth',1.5)
-title('Coherence')
-legend('coherence')
-xlabel('frequency [Hz]')
-
 
 
 toc
